@@ -1,0 +1,29 @@
+import { Button } from '@/components/ui/button'
+import { BellIcon } from '@heroicons/react/24/outline'
+
+import {
+  AuthenticatedTemplate,
+  UnauthenticatedTemplate,
+} from '@azure/msal-react'
+
+// components Layout
+import SignInButton from './SignInButton'
+import AvatarDropdown from './AvatarDropdown'
+
+const Header = (): JSX.Element => {
+  return (
+    <header className="flex h-14 items-center bg-white dark:bg-gray-800">
+      <AuthenticatedTemplate>
+        <Button className="ml-auto" size="icon" variant="ghost">
+          <BellIcon className="h-5 w-5" />
+        </Button>
+        <AvatarDropdown />
+      </AuthenticatedTemplate>
+      <UnauthenticatedTemplate>
+        <SignInButton />
+      </UnauthenticatedTemplate>
+    </header>
+  )
+}
+
+export default Header
