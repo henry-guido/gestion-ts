@@ -1,30 +1,21 @@
 import { Button } from '@/components/ui/button'
 import { loginRequest } from '../authConfig'
 import { useMsal } from '@azure/msal-react'
-import { getPicture } from '@/graph'
 
-type SignInButtonProps = {
-  setPicture: (getPic: string) => void
-}
+import { useInfoAccountStore } from '@/store/userInfoAccount'
 
-const SignInButton = ({ setPicture }: SignInButtonProps): JSX.Element => {
-  const { instance, accounts } = useMsal()
+const SignInButton = (): JSX.Element => {
+  const { instance, accounts } = useMsal(); 
+  const getAccountInfo  = useInfoAccountStore(state => state.getAccountInfo)
 
   const handleLogin = async (): Promise<void> => {
     try {
       await instance.loginPopup(loginRequest).catch((e) => {
         console.log(e)
       })
+      
+      await getAccountInfo(instance, accounts)
 
-      const tokenResponse = await instance.acquireTokenSilent({
-        ...loginRequest,
-        account: accounts[0],
-      })
-      console.log('handleLogin  tokenResponse:', tokenResponse)
-
-      const getPic = (await getPicture(tokenResponse.accessToken)) ?? ''
-      console.log('handleLogin  getPic:', getPic)
-      setPicture(getPic)
     } catch (error) {
       console.error('Error requesting profile data:', error)
     }

@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,9 +13,19 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline'
 import { useMsal } from '@azure/msal-react'
+import {useInfoAccountStore} from '@/store/userInfoAccount'
 
 const AvatarDropdown = (): JSX.Element => {
   const { instance } = useMsal()
+  const {name, picture} = useInfoAccountStore(state => state.accountInfo)
+
+  let nameInitials = ''
+  if (name) {
+    nameInitials = name
+      .split(' ')
+      .map((x) => x[0])
+      .join('')
+  }
 
   const handleLogout = (): void => {
     instance
@@ -28,17 +37,19 @@ const AvatarDropdown = (): JSX.Element => {
         console.error('Logout failed:', error)
       })
   }
-
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="mx-2" size="icon" variant="ghost">
+        <div className="ml-2 mr-4">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={picture} />
+            <AvatarFallback className="bg-primary text-secondary">
+              {nameInitials}
+            </AvatarFallback>
           </Avatar>
           <span className="sr-only">Toggle user menu</span>
-        </Button>
+        </div>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56">
