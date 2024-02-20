@@ -1,9 +1,7 @@
 import { graphConfig } from "./authConfig"
 
-const headers = new Headers();
-
 export async function callMsGraph(accessToken: string): Promise<any> {
-
+  const headers = new Headers();
   headers.append("Authorization", `Bearer ${accessToken}`);
 
   const options = {
@@ -24,7 +22,7 @@ export async function callMsGraph(accessToken: string): Promise<any> {
 }
 
 export async function getPicture(accessToken: string): Promise<string | undefined> {
-
+  const headers = new Headers();
   headers.append("Authorization", `Bearer ${accessToken}`);
 
   const options = {
