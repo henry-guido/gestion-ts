@@ -17,10 +17,7 @@ const router = createBrowserRouter(
     <>
       <Route element={<Layout />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />}>
-          <Route
-            path={import.meta.env.VITE_ORIGIN_PATH_IIS}
-            element={<Home />}
-          />
+          <Route index element={<Home />} />
           <Route
             path={`${import.meta.env.VITE_ORIGIN_PATH_IIS}/employees`}
             element={<Employees />}
