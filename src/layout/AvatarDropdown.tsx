@@ -12,12 +12,15 @@ import {
   ArrowRightStartOnRectangleIcon,
   UserIcon,
 } from '@heroicons/react/24/outline'
-import { useMsal } from '@azure/msal-react'
-import {useInfoAccountStore} from '@/store/userInfoAccount'
+import { useMsal, useIsAuthenticated } from '@azure/msal-react'
+import { useInfoAccountStore } from '@/store/userInfoAccount'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const AvatarDropdown = (): JSX.Element => {
   const { instance } = useMsal()
-  const {name, picture} = useInfoAccountStore(state => state.accountInfo)
+  const { name, picture } = useInfoAccountStore((state) => state.accountInfo)
+  const isAuthenticated = useIsAuthenticated()
+  const changeLoading = useInfoAccountStore((state) => state.changeLoading)
 
   let nameInitials = ''
   if (name) {
@@ -28,6 +31,7 @@ const AvatarDropdown = (): JSX.Element => {
   }
 
   const handleLogout = (): void => {
+    changeLoading()
     instance
       .logoutPopup({
         postLogoutRedirectUri: '/',
@@ -37,7 +41,7 @@ const AvatarDropdown = (): JSX.Element => {
         console.error('Logout failed:', error)
       })
   }
-  
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -45,7 +49,11 @@ const AvatarDropdown = (): JSX.Element => {
           <Avatar>
             <AvatarImage src={picture} />
             <AvatarFallback className="bg-primary text-secondary">
-              {nameInitials}
+              {isAuthenticated ? (
+                nameInitials
+              ) : (
+                <Skeleton className="h-12 w-12 rounded-full" />
+              )}
             </AvatarFallback>
           </Avatar>
           <span className="sr-only">Toggle user menu</span>
