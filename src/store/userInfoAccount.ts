@@ -6,15 +6,18 @@ import { type IPublicClientApplication, type AccountInfo } from '@azure/msal-bro
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 interface State {
-  accountInfo: UserAccountInfo;
-  getAccountInfo: (instance: IPublicClientApplication, accounts: AccountInfo[]) => Promise<void>;
+  accountInfo: UserAccountInfo
+  loading: boolean
+  changeLoading: () => void
+  getAccountInfo: (instance: IPublicClientApplication, accounts: AccountInfo[]) => Promise<void>
 }
 
 export const useInfoAccountStore = create<State>()(persist((set, get) => {
   return {
     accountInfo: { name: '', email: '', picture: '' },
+    loading: false,
+    changeLoading: () => { set((state) => ({ loading: !state.loading })) },
     getAccountInfo: async (instance, accounts) => {
-
       try {
         const tokenResponse = await instance.acquireTokenSilent({
           ...loginRequest,
@@ -28,11 +31,6 @@ export const useInfoAccountStore = create<State>()(persist((set, get) => {
         const picture = await getPicture(tokenResponse.accessToken) ?? '';
 
         set((state) => ({ accountInfo: { ...state.accountInfo, picture, name, email } }));
-
-        const previousPictureUrl = get().accountInfo.picture;
-        if (previousPictureUrl && previousPictureUrl !== picture) {
-          URL.revokeObjectURL(previousPictureUrl);
-        }
       } catch (error) {
         console.error('Error al solicitar datos del perfil:', error);
       }
