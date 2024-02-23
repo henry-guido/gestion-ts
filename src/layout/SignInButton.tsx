@@ -25,7 +25,7 @@ const SignInButton = (): JSX.Element => {
   }
 
   return (
-    <Button className="ml-auto mr-2" onClick={handleLogin}>
+    <Button className="ml-auto mr-2" onClick={handleLogin} disabled={loading}>
       {loading && <Loader className="mr-2 h-4 w-4 animate-spin" />}
       {loading ? 'Iniciando Sesión' : 'Iniciar Sesión'}
     </Button>

@@ -32,7 +32,8 @@ export const useInfoAccountStore = create<State>()(persist((set, get) => {
 
         set((state) => ({ accountInfo: { ...state.accountInfo, picture, name, email } }));
       } catch (error) {
-        console.error('Error al solicitar datos del perfil:', error);
+        // console.error('Error al solicitar datos del perfil:', error);
+        set(() => ({ loading: false }))
       }
     },
   }
