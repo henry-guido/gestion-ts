@@ -45,7 +45,7 @@ const AvatarDropdown = (): JSX.Element => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="ml-2 mr-4">
+        <div className="ml-2 mr-4 cursor-pointer">
           <Avatar>
             <AvatarImage src={picture} />
             <AvatarFallback className="bg-primary text-secondary">
