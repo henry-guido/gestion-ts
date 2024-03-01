@@ -9,13 +9,20 @@ import { useInfoAccountStore} from "@/store/userInfoAccount";
 // components Layout
 import SignInButton from './SignInButton'
 import AvatarDropdown from './AvatarDropdown'
+import ToogleTheme from './ToogleTheme';
 
 const Header = (): JSX.Element => {
   const {name} = useInfoAccountStore(state => state.accountInfo)
+  const toggleDarkMode = (): void => {
+   
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <header className="flex h-14 items-center bg-white dark:bg-gray-800">
+    <header className="flex h-14 items-center bg-background shadow-sm">
       <AuthenticatedTemplate>
-        <Button className="ml-auto" size="icon" variant="ghost">
+        <ToogleTheme />
+        <Button size="icon" variant="ghost" onClick={toggleDarkMode}>
           <BellIcon className="h-5 w-5 stroke-2" />
         </Button>
         {name && <p className="font-medium">{name}</p>}
