@@ -8,9 +8,10 @@ import {
 
 // pages
 import ErrorPage from '@/pages/ErrorPage'
-import Employees from '@/pages/Employess/Employees'
+import Employees from '@/pages/employess/Employees'
 import Layout from '@/layout/Layout'
 import Home from '@/pages/Home'
+import Applications from '@/pages/applications/Applications'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,11 +23,12 @@ const router = createBrowserRouter(
             path={`${import.meta.env.VITE_ORIGIN_PATH_IIS}/employees`}
             element={<Employees />}
           />
+          <Route path={`${import.meta.env.VITE_ORIGIN_PATH_IIS}/applications`} 
+          element={<Applications />} />
         </Route>
       </Route>
-      ,
-    </>,
-  ),
+    </>
+  )
 )
 
 const IndexRouter = (): JSX.Element => {
