@@ -12,7 +12,7 @@ interface State {
   getAccountInfo: (instance: IPublicClientApplication, accounts: AccountInfo[]) => Promise<void>
 }
 
-export const useInfoAccountStore = create<State>()(persist((set, get) => {
+export const useInfoAccountStore = create<State>()(persist((set) => {
   return {
     accountInfo: { name: '', email: '', picture: '' },
     loading: false,
