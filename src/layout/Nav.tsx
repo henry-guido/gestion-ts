@@ -39,9 +39,9 @@ const Nav = ({ links, isCollapsed }: NavProps): JSX.Element => {
       className="group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
     >
       <nav className=" grid gap-1 px-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
-        {links.map((link, index) =>
+        {links.map((link) =>
           isCollapsed ? (
-            <TooltipProvider key={index}>
+            <TooltipProvider key={link.id}>
               <Tooltip delayDuration={0}>
                 <TooltipTrigger asChild>
                   <NavLink
@@ -62,7 +62,7 @@ const Nav = ({ links, isCollapsed }: NavProps): JSX.Element => {
             </TooltipProvider>
           ) : (
             <NavLink
-              key={index}
+              key={link.id}
               to={link.path}
               className={cn(
                 buttonVariants({ variant: link.variant, size: 'sm' }),

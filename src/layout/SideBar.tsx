@@ -10,7 +10,7 @@ const SideBar = (): JSX.Element => {
   const [isCollapsed, setIsCollapsed] = useState(true)
   const isAuthenticated = useIsAuthenticated()
   const links: Link[] = [
-    { title: 'Inicio', icon: 'HomeIcon', path: '/', variant: 'ghost' },
+    { id: 1, title: 'Inicio', icon: 'HomeIcon', path: '/', variant: 'ghost' },
   ]
 
   const toogleSidebar = (): void => {
@@ -20,18 +20,21 @@ const SideBar = (): JSX.Element => {
   if (isAuthenticated) {
     links.push(
       {
+        id: 2,
         title: 'Solicitudes',
         icon: 'BriefcaseIcon',
         path: '/applications',
         variant: 'ghost',
       },
       {
+        id:3,
         title: 'Colaboradores',
         icon: 'UsersIcon',
         path: '/employees',
         variant: 'ghost',
       },
       {
+        id:4,
         title: 'Configuraciones',
         icon: 'Cog6ToothIcon',
         path: '/configurations',
