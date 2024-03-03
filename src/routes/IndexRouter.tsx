@@ -12,7 +12,6 @@ import Employees from '@/pages/employess/Employees'
 import Layout from '@/layout/Layout'
 import Home from '@/pages/Home'
 import Applications from '@/pages/applications/Applications'
-import { ThemeProvider } from '@/contexts/ThemeProvider'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,9 +33,7 @@ const router = createBrowserRouter(
 
 const IndexRouter = (): JSX.Element => {
   return (
-    <ThemeProvider defaultTheme='system' storageKey='ui-theme' >
       <RouterProvider router={router} />
-    </ThemeProvider>
   )
 }
 

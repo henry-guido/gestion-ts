@@ -13,6 +13,7 @@ import { MsalProvider } from '@azure/msal-react'
 
 import { msalConfig } from './authConfig'
 import IndexRouter from './routes/IndexRouter.tsx'
+import { ThemeProvider } from './contexts/ThemeProvider.tsx'
 
 const msalInstance = new PublicClientApplication(msalConfig)
 
@@ -33,7 +34,9 @@ msalInstance.addEventCallback((event: EventMessage) => {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <MsalProvider instance={msalInstance}>
+    <ThemeProvider defaultTheme='system' storageKey='ui-theme' >
       <IndexRouter />
+    </ThemeProvider>  
     </MsalProvider>
   </React.StrictMode>,
 )
