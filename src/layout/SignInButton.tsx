@@ -4,6 +4,7 @@ import { useMsal } from '@azure/msal-react'
 
 import { useInfoAccountStore } from '@/store/userInfoAccount'
 import { Loader } from '@/components/Icons'
+import ToogleTheme from './ToogleTheme'
 
 const SignInButton = (): JSX.Element => {
   const { instance, accounts } = useMsal()
@@ -25,10 +26,13 @@ const SignInButton = (): JSX.Element => {
   }
 
   return (
-    <Button className="ml-auto mr-2" onClick={handleLogin} disabled={loading}>
+    <div className='flex ml-auto'>
+    <ToogleTheme />
+    <Button className="mx -2" onClick={handleLogin} disabled={loading}>
       {loading && <Loader className="mr-2 h-4 w-4 animate-spin" />}
       {loading ? 'Iniciando Sesión' : 'Iniciar Sesión'}
     </Button>
+    </div>
   )
 }
 
