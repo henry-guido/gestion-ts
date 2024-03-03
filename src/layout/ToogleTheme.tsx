@@ -1,40 +1,10 @@
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useTheme } from "@/contexts/ThemeProvider";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { useUserPreference } from "@/store/userPreference";
-
-
 
 const ToogleTheme = () : JSX.Element => {
-  const [theme, setTheme] = useUserPreference(state => [state.theme ,state.setTheme])
-  
-  useEffect(() => {
-    const setRootTheme = (color: string): void => {
-      const root = document.documentElement
-      root.classList.remove('light', 'dark')
-      root.classList.add(color);
-    };
-
-    const handleThemeChange = (e: MediaQueryListEvent): void => {
-      setRootTheme(e.matches ? 'dark' : 'light')
-    };
-
-    const themeSystem = window.matchMedia('(prefers-color-scheme: dark)');
-
-    if (theme === 'system') {
-      themeSystem.addEventListener('change', handleThemeChange)
-      setRootTheme(themeSystem.matches ? 'dark' : 'light')
-    } else {
-      themeSystem.removeEventListener('change', handleThemeChange)
-      setRootTheme(theme);
-    }
-
-    return () => {
-      themeSystem.removeEventListener('change', handleThemeChange)
-    };
-
-  }, [theme]);
+  const { theme ,setTheme } = useTheme()
 
   return (
     <div className="ml-auto" >
