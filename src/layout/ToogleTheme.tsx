@@ -26,7 +26,7 @@ const ToogleTheme = () : JSX.Element => {
       setTimeout(() => {
         setRootTheme(e.matches ? 'dark' : 'light');
         setIsChangingTheme(false);
-      }, 300); // Tiempo de espera en milisegundos, ajusta según la duración de tu animación CSS
+      }, 300);
     };
 
     const themeSystem = window.matchMedia('(prefers-color-scheme: dark)');
