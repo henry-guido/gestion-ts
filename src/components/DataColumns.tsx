@@ -17,6 +17,6 @@ export const columns: Array<ColumnDef<Application>> = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: "Estado",
   },
 ]

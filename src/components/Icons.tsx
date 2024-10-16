@@ -1,3 +1,5 @@
+import { type SVGProps } from "react"
+
 const className = 'h-5 w-5'
 
 export function HomeIcon(): JSX.Element {
@@ -38,7 +40,7 @@ export function VacationIcon(): JSX.Element {
   )
 }
 
-export function Loader(props: any): JSX.Element {
+export function Loader(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -55,3 +57,22 @@ export function Loader(props: any): JSX.Element {
     </svg>
   )
 }
+
+  export function CalendarPlus(props: SVGProps<SVGSVGElement>) : JSX.Element{
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        className="lucide lucide-calendar-plus"
+        viewBox="0 0 24 24"
+        {...props}
+      >
+        <path d="M8 2v4M16 2v4M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8M3 10h18M16 19h6M19 16v6" />
+      </svg>
+    )
+  }
+  

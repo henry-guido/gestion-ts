@@ -8,8 +8,10 @@ const Layout = (): JSX.Element => {
       <SideBar />
       <div className="flex flex-col flex-1 min-h-svh bg-background2">
         <Header />
-        <main className='flex-1 overflow-auto'>
-          <Outlet />
+        <main className="flex-1 overflow-auto ">
+          <section className="max-w-screen-2xl mx-auto">
+            <Outlet />
+          </section>
         </main>
       </div>
     </div>
