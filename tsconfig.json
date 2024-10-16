@@ -28,5 +28,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src",".eslintrc.cjs","vite.config.ts","tailwind.config.js"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": [
+    "src/components/ui",  
+  ]
 }

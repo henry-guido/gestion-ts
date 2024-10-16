@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { addDays, format } from 'date-fns'
+import { format } from 'date-fns'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -31,25 +31,26 @@ import { cn } from '@/lib/utils'
 import { ArrowLeftIcon, CalendarDaysIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from 'react-router-dom'
 
+const formSchema = z.object({
+  type: z.string({
+    required_error: 'Tipo es requerido',
+  }),
+  date: z
+    .object(
+      {
+        from: z.date(),
+        to: z.date().optional(),
+      },
+      { required_error: 'Fecha es requerido' },
+    )
+    .refine((date) => {
+      return !!date.to
+    }, 'Fecha final es requerido'),
+  description: z.string(),
+})
+
 const NewApplication = (): JSX.Element => {
   const navigate = useNavigate()
-  const formSchema = z.object({
-    type: z.string({
-      required_error: 'Tipo es requerido',
-    }),
-    date: z
-      .object(
-        {
-          from: z.date(),
-          to: z.date().optional(),
-        },
-        { required_error: "Fecha es requerido" },
-      )
-      .refine((date) => {
-        return !!date.to
-      }, "Fecha final es requerido"),
-    description: z.string(),
-  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

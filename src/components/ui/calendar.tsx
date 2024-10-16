@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as React from 'react'
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
+  // ChevronLeftIcon,
+  // ChevronRightIcon,
 } from '@heroicons/react/24/outline'
 import { DayPicker } from 'react-day-picker'
 
@@ -57,12 +59,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => (
-          <ChevronDoubleLeftIcon className="h-4 w-4" />
-        ),
-        IconRight: ({ ...props }) => (
-          <ChevronDoubleRightIcon className="h-4 w-4" />
-        ),
+        IconLeft: () => <ChevronDoubleLeftIcon className="h-4 w-4" />,
+        IconRight: () => <ChevronDoubleRightIcon className="h-4 w-4" />,
       }}
       {...props}
     />
